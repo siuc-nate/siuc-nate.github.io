@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+    <title>Pathway Viewer Demo</title>
+    <style type="text/css">
+        .demoBox .urlBox { display: flex; align-items: center; gap: 1px; padding: 1px; }
+        .demoBox .urlBox input { flex: 1 1 auto; display: block; height: 30px; }
+        .demoBox .urlBox button { flex: 0 0 200px; display: block; height: 30px; }
+        .demoBox .pathwayViewer.pathwayContent { max-height: 75vh; }
+        .pathwayViewer.error { padding: 5px; background-color: #FCC; margin: 2px 5px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="site header"></div>
+    <div class="site body"></div>
+    <div class="site footer"></div>
+</body>
+<script src="../js/site.js" onload="Site.setup('..')"></script>
+<script type="text/javascript" src="./pathwayviewer-v0.1.0.js"></script>
+<script type="text/javascript">
+    var Viewer = Site.createTag("div", "demoBox").appendTo(Site.Body);
+    Viewer.URLBox = Site.createTag("div", "urlBox").appendTo(Viewer);
+    Viewer.ContentBox = Site.createTag("div", "contentBox").appendTo(Viewer);
+    Viewer.Input = Site.createTag("input", "", { type: "text", placeholder: "Pathway Registry URI" }).appendTo(Viewer.URLBox);
+    Viewer.Button = Site.createTag("button", "").appendText("Load Pathway").appendTo(Viewer.URLBox).addEventListener("click", function(){
+        Viewer.ContentBox.innerHTML = "";
+        PathwayViewer.loadPathway(Viewer.ContentBox, Viewer.Input.value);
+    });
+</script>
