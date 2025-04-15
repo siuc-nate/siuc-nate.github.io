@@ -2,7 +2,7 @@
 <head>
     <title>Pathway Viewer Demo</title>
     <style type="text/css">
-        .demoBox .urlBox { display: flex; align-items: center; gap: 1px; padding: 1px; }
+        .demoBox .urlBox { display: flex; align-items: center; gap: 1px; padding: 1px 10px; }
         .demoBox .urlBox input { flex: 1 1 auto; display: block; height: 30px; }
         .demoBox .urlBox button { flex: 0 0 200px; display: block; height: 30px; }
         .demoBox .pathwayViewer.pathwayContent { max-height: 75vh; }
@@ -11,7 +11,10 @@
 </head>
 <body>
     <div class="site header"></div>
-    <div class="site body"></div>
+    <div class="site body">
+        <h1>Simple Pathway Viewer</h1>
+        <p>The <a href="https://github.com/siuc-nate/pathway-viewer" target="_blank">Simple Pathway Viewer</a> provides an easy way to view <a href="https://credreg.net/ctdl/terms" target="_blank">CTDL</a> <a href="https://credreg.net/ctdl/terms/Pathway" target="_blank">Pathway</a> data. To use the demo below, paste the URI to a CTDL Pathway from the Credential Registry into the box below and click "Load Pathway". To use this script on your site, review the <a href="https://github.com/siuc-nate/pathway-viewer" target="_blank">documentation</a>.</p>
+    </div>
     <div class="site footer"></div>
 </body>
 <script src="../js/site.js" onload="Site.setup('..')"></script>
@@ -20,7 +23,7 @@
     var Viewer = Site.createTag("div", "demoBox").appendTo(Site.Body);
     Viewer.URLBox = Site.createTag("div", "urlBox").appendTo(Viewer);
     Viewer.ContentBox = Site.createTag("div", "contentBox").appendTo(Viewer);
-    Viewer.Input = Site.createTag("input", "", { type: "text", placeholder: "Pathway Registry URI" }).appendTo(Viewer.URLBox);
+    Viewer.Input = Site.createTag("input", "", { type: "text", placeholder: "https://credentialengineregistry.org/resources/{your-pathway-ctid}" }).appendTo(Viewer.URLBox);
     Viewer.Button = Site.createTag("button", "").appendText("Load Pathway").appendTo(Viewer.URLBox).addEventListener("click", function(){
         Viewer.ContentBox.innerHTML = "";
         PathwayViewer.loadPathway(Viewer.ContentBox, Viewer.Input.value);
