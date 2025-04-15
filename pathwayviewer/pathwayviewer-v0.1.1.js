@@ -1,4 +1,4 @@
-// See https://github.com/siuc-nate/pathway-viewer/tree/v0.1.0
+// See https://github.com/siuc-nate/pathway-viewer/tree/v0.1.1
 // Global object to stored data about all Pathways loaded on this page
 var PathwayViewer = {
     Resources: {},
@@ -34,7 +34,8 @@ PathwayViewer.loadPathway = async function(
                 ComponentProxyForLinks: [
                     { Label: { "en-us": "View Resource in Credential Registry" }, URIPattern: "{uri}" },
                     { Label: { "en-us": "View Resource in Credential Finder" }, URIPattern: "https://credentialfinder.org/resources/{ctid}" }
-                ]
+                ],
+                ...(options?.UI || {})
             },
             Language: {
                 MaxCodes: 100,
@@ -230,7 +231,7 @@ PathwayViewer.getText = function(LanguageOptions, value, cssClass){
             if(renderable.length >= LanguageOptions.MaxCodes){
                 return;
             }
-            renderable.push({ code: key, value: value[code] });
+            renderable.push({ code: code, value: value[code] });
         });
         
         // Render the Language Map data as HTML and return it
